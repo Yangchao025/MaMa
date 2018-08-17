@@ -438,4 +438,34 @@
     liss.mouseleave(function () {
         $(this).children('dl').slideUp();
     })
+
+    ////  底部冒泡   创建  添加   位置   动起来
+    let lose=document.querySelector('.lose');
+    for(let i=0;i<50;i++){
+        let spans=document.createElement('span');
+        spans.classList.add('rain');
+        let bottom=Math.round(Math.random())+'px';
+        let lefts=Math.round(Math.random()*(innerWidth-400))+200;
+
+        spans.style.bottom=bottom+'px';
+        spans.style.left=lefts+'px';
+        spans.style.transitionDelay=Math.random()*3000+'ms';
+        lose.appendChild(spans);
+    }
+
+    let rains=document.querySelectorAll('.lose > span');
+    setInterval(function () {                                 // 时间函数
+        for(let i=0;i<rains.length;i++){
+            rains[i].style.bottom=innerHeight+'px';
+            rains[i].style.transition='all ease 2s '+Math.random()*3000+'ms';
+        }
+    },3000);
+    for(let i=0;i<rains.length;i++){
+        rains[i].addEventListener('webkitTransitionEnd',function () {
+            rains[i].style.transition='none';        //  回去的时候 不用看到过度
+            rains[i].style.bottom='-20px';
+        })
+
+    }
+
 </script>
